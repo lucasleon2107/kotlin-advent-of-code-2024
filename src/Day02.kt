@@ -5,7 +5,7 @@ fun main() {
         var safeReports = 0
 
         input.forEach { line ->
-            if(isSafe(toIntList(line))) {
+            if (isSafe(toIntList(line))) {
                 safeReports++
             }
         }
@@ -19,14 +19,14 @@ fun main() {
         for (line in input) {
             val numbers = toIntList(line)
             var safe = false
-            for(i in 0..numbers.lastIndex) {
+            for (i in 0..numbers.lastIndex) {
                 safe = isSafe(numbers.toMutableList().apply { removeAt(i) })
-                if(safe) {
+                if (safe) {
                     break
                 }
             }
 
-            if(safe) safeReports++
+            if (safe) safeReports++
         }
 
         return safeReports
@@ -53,10 +53,16 @@ fun isMonotonic(input: List<Int>): Boolean {
     var isDecreasing = true
     var isIncreasing = true
 
-    for(i in 0 until input.lastIndex) {
-        if(input[i] < input[i + 1]) { isDecreasing = false}
-        if(input[i] > input[i + 1]) { isIncreasing = false}
-        if(input[i] == input[i + 1]) { return false}
+    for (i in 0 until input.lastIndex) {
+        if (input[i] < input[i + 1]) {
+            isDecreasing = false
+        }
+        if (input[i] > input[i + 1]) {
+            isIncreasing = false
+        }
+        if (input[i] == input[i + 1]) {
+            return false
+        }
     }
 
     return isDecreasing || isIncreasing
@@ -67,7 +73,7 @@ fun isDiffGreaterThan3(num1: Int, num2: Int): Boolean {
 }
 
 fun isSafe(input: List<Int>): Boolean {
-    if(!isMonotonic(input)) {
+    if (!isMonotonic(input)) {
         return false
     }
 
