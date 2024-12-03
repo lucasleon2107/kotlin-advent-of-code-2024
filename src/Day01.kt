@@ -18,14 +18,18 @@ fun main() {
         val leftArray = input.map { it.split("   ").first().toInt() }
         val rightArray = input.map { it.split("   ").last().toInt() }
 
-        return leftArray
-            .groupingBy { it }
-            .eachCount()
-            .map { (number, _) ->
-                number * (rightArray.count() { it == number })
-            }
-            .sum()
+        val similarityArray = mutableListOf<Int>()
+
+        leftArray.forEach { number ->
+            similarityArray += rightArray.filter { it == number }.size * number
+        }
+
+        return similarityArray.sum()
     }
+
+    val testInput = readInput("Day01_test")
+    check(part1(testInput) == 11)
+    check(part2(testInput) == 31)
 
     val input = readInput("Day01")
     part1(input).println()
